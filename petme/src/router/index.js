@@ -1,4 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
+import Home from "../views/Home.vue";
+import Register from "../views/Register.vue";
+import MainList from "../views/MainList.vue";
+import Login from "../views/Login.vue";
+import AddPet from "../views/AddPet.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -6,10 +11,27 @@ const router = createRouter({
         {
             path: "/",
             name: "home",
+            component: Home,
         },
         {
-            path: "/about",
-            name: "about",
+            path: "/register",
+            name: "register",
+            component: Register,
+        },
+        {
+            path: "/login",
+            name: "login",
+            component: Login,
+        },
+        {
+            path: "/main",
+            name: "mainlist",
+            component: MainList,
+        },
+        {
+            path: "/addPet",
+            name: "addPet",
+            component: AddPet,
         },
     ],
 });
