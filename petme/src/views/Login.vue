@@ -1,7 +1,6 @@
 <script>
 import { mapActions, mapState, mapWritableState } from "pinia";
 import { loginRegister } from "../stores/LoginRegister";
-import axios from "axios";
 
 export default {
     name: "Login",

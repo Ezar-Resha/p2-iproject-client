@@ -7,10 +7,41 @@ export const petStore = defineStore({
         return {
             baseURL: "http://localhost:5555",
             breeds: [],
+            pets: [],
+            petDetail: {},
         };
     },
     getters: {},
     actions: {
+        getAllPets() {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    let response = await axios({
+                        method: "get",
+                        url: `${this.baseURL}/pets`,
+                    });
+                    this.pets = response.data.pets;
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        },
+        getPetDetail(id) {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    let response = await axios({
+                        method: "get",
+                        url: `${this.baseURL}/pets/${id}`,
+                    });
+
+                    this.petDetail = response.data.pet;
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        },
         createPet(petObject) {
             return new Promise(async (resolve, reject) => {
                 try {
@@ -35,7 +66,7 @@ export const petStore = defineStore({
                         imageUrl,
                     } = petObject;
 
-                    const response = axios({
+                    const response = await axios({
                         method: "post",
                         url: `${this.baseURL}/pets/`,
                         data: {
@@ -63,7 +94,7 @@ export const petStore = defineStore({
 
                         //headers
                     });
-                    console.log(response);
+
                     resolve();
                 } catch (err) {
                     reject(err);

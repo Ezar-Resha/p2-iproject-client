@@ -21,6 +21,9 @@ export default {
                     });
                 });
         },
+        created() {
+            console.log(this.isLoggedIn);
+        },
         computed: {
             ...mapState(loginRegister, ["isLoggedIn, loggedUser"]),
 
@@ -33,9 +36,23 @@ export default {
 </script>
 
 <template>
-    <pre>test what</pre>
     <div class="flex bg-orange-400 text-black mt-auto mb-auto pt-2 pb-2">
-        <a href="#" v-if="!isLoggedIn" class="ml-auto mr-8 text-3xl font-semibold hover:scale-125">
+        <a href="#" class="ml-8 mr-8 text-3xl font-semibold hover:scale-125">
+            <router-link to="/main"> Home </router-link>
+        </a>
+        <a href="#" class="ml-8 mr-8 text-3xl font-semibold hover:scale-125">
+            <router-link to="/addpet"> Add Pet </router-link>
+        </a>
+        <a href="#" class="ml-8 mr-8 text-3xl font-semibold hover:scale-125">
+            <router-link to="/main"> My Likes </router-link>
+        </a>
+        <a href="#" class="ml-8 mr-auto text-3xl font-semibold hover:scale-125">
+            <router-link to="/main"> My Matches </router-link>
+        </a>
+        <a href="#" class="ml-auto mr-8 text-3xl font-semibold hover:scale-125">
+            <router-link to="/main"> log out </router-link>
+        </a>
+        <a href="#" class="ml-8 mr-8 text-3xl font-semibold hover:scale-125">
             <router-link to="/main"> PET.ME </router-link>
         </a>
     </div>

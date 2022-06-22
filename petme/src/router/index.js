@@ -4,6 +4,7 @@ import Register from "../views/Register.vue";
 import MainList from "../views/MainList.vue";
 import Login from "../views/Login.vue";
 import AddPet from "../views/AddPet.vue";
+import Detail from "../views/Detail.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
             path: "/addPet",
             name: "addPet",
             component: AddPet,
+        },
+        {
+            path: "/detail/:id",
+            name: "detail",
+            component: Detail,
         },
     ],
 });
