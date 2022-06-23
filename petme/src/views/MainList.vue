@@ -24,6 +24,7 @@ export default {
 </script>
 
 <template>
+    <p class="max-w-screen-2xl mx-auto mt-8 bg-white outline-1 text-3xl uppercase font-bold text-center">PET LISTS</p>
     <div class="flex items-center pt-24 pl-16 pr-16 pb-24 bg-white">
         <div class="m-auto flex w-[1000px] flex-wrap">
             <ImageCard :listPets="pets"></ImageCard>

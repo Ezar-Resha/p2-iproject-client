@@ -1,6 +1,36 @@
 <script>
+import { mapActions, mapState } from "pinia";
+import { loginRegister } from "../stores/LoginRegister";
+
 export default {
     name: "Register",
+    data() {
+        return {
+            email: "",
+            username: "",
+            password: "",
+        };
+    },
+    methods: {
+        ...mapActions(loginRegister, ["register", "login"]),
+        methodRegister() {
+            this.register(this.email, this.username, this.password)
+                .then((res) => {
+                    this.login(this.email, this.password);
+                })
+                .then((res) => {
+                    this.$router.push("/OTPAuth");
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .finally(() => {
+                    this.email = "";
+                    this.username = "";
+                    this.password = "";
+                });
+        },
+    },
 };
 </script>
 
@@ -21,8 +51,8 @@ export default {
                     <p class="ml-8 mb-2 font-semibold tracking-tighter text-lg">USERNAME</p>
                     <input
                         type="text"
-                        name="email"
-                        v-model="email"
+                        name="username"
+                        v-model="username"
                         class="ml-8 frm-control w-9/12 block px-3 py-1.5 text-base font-normal text-black bg-white bg-clip-padding border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     />
 
@@ -36,7 +66,7 @@ export default {
                     />
                     <Button
                         class="mt-8 w-9/12 ml-8 mr-8 px-6 py-2 border-2 border-red-600 text-red-700 bg-white font-medium text-xs leading-tight uppercase rounded hover:scale-110 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-                        @click.prevent="methodLogin(username, password)"
+                        @click.prevent="methodRegister"
                     >
                         Register Button</Button
                     >

@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import { data } from "autoprefixer";
 
 export const loginRegister = defineStore({
     id: "loginRegister",
@@ -40,7 +41,7 @@ export const loginRegister = defineStore({
                 try {
                     const response = await axios({
                         method: "POST",
-                        url: `${this.baseURL}/public/register`,
+                        url: `${this.baseURL}/register`,
                         data: { email, username, password },
                     });
                     resolve();
@@ -49,43 +50,52 @@ export const loginRegister = defineStore({
                 }
             });
         },
+        OTPAuth(otp) {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    let response = await axios({
+                        method: "post",
+                        url: `${this.baseURL}/verifyOTP`,
+                        headers: {
+                            access_token: localStorage.getItem("access_token"),
+                        },
+                        data: {
+                            otp: otp,
+                        },
+                    });
+                    console.log(response);
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        },
 
-        // handleCredentialResponse(response) {
-        //     return new Promise(async (resolve, reject) => {
-        //         try {
-        //             const res = await axios({
-        //                 method: "POST",
-        //                 url: `${this.baseURL}/public/googlelogin`,
-        //                 headers: {
-        //                     google_token: response.credential,
-        //                 },
-        //             });
-        //             localStorage.setItem("access_token", res.data.access_token);
-        //             localStorage.setItem("role", res.data.role);
-        //             localStorage.setItem("email", res.data.email);
-        //             localStorage.setItem("user", res.data.user);
-        //             this.loggedUser = res.data.user;
-        //             this.isLoggedIn = true;
-        //             this.router.push("/");
-        //             resolve();
-        //         } catch (err) {
-        //             reject(err);
-        //         }
-        //     });
-        // },
-
+        requestOTP() {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    let response = await axios({
+                        method: "post",
+                        url: `${this.baseURL}/requestOTP`,
+                        headers: {
+                            access_token: localStorage.getItem("access_token"),
+                        },
+                    });
+                    console.log(response);
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        },
         logout() {
             return new Promise((resolve, reject) => {
                 try {
+                    localStorage.clear();
                     this.isLoggedIn = false;
                     this.loggedEmail = "";
                     this.loggedUser = "";
-                    google.accounts.id.disableAutoSelect();
-                    google.accounts.id.revoke(localStorage.getItem("email"), (done) => {
-                        localStorage.clear();
-                        console.log("consent revoked");
-                        resolve();
-                    });
+                    resolve();
                 } catch (err) {
                     reject(err);
                 }

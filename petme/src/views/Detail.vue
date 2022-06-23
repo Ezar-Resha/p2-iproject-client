@@ -1,5 +1,6 @@
 <script>
-import { mapActions, mapState } from "pinia";
+import { mapActions, mapState, mapWritableState } from "pinia";
+import { loginRegister } from "../stores/LoginRegister";
 import { petStore } from "../stores/pets";
 
 export default {
@@ -13,10 +14,22 @@ export default {
             });
     },
     methods: {
-        ...mapActions(petStore, ["getPetDetail"]),
+        ...mapActions(petStore, ["getPetDetail", "addMatch"]),
+
+        methodMatch(id) {
+            this.addMatch(id)
+                .then((res) => {
+                    console.log("done");
+                    this.$router.push("/main");
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
     },
     computed: {
         ...mapState(petStore, ["petDetail"]),
+        ...mapState(loginRegister, ["isLoggedIn"]),
     },
 };
 </script>
@@ -99,7 +112,23 @@ export default {
                 </div>
             </div>
             <div class="h-1/3 mb-8 ml-8 mr-8">
-                <p class="pb-8 text-2xl italic">{{ petDetail.description }}</p>
+                <div class="h-2/3 max-h-2/3">
+                    <p class="pb-8 text-2xl italic line-clamp-3">
+                        {{ petDetail.description }}
+                    </p>
+                </div>
+
+                <div class="text-center" v-if="isLoggedIn === true">
+                    <a
+                        href="#"
+                        class="bg-blue-400 p-4 font-bold hover:cursor-pointer"
+                        @click.prevent="methodMatch(petDetail.id)"
+                        >REQUEST ADOPTION</a
+                    >
+                </div>
+                <div class="text-center" v-if="isLoggedIn === false">
+                    <a href="#" class="bg-gray-400 p-4 font-bold hover:cursor-pointer">REQUEST ADOPTION</a>
+                </div>
             </div>
         </div>
     </div>

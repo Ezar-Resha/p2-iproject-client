@@ -5,6 +5,9 @@ import MainList from "../views/MainList.vue";
 import Login from "../views/Login.vue";
 import AddPet from "../views/AddPet.vue";
 import Detail from "../views/Detail.vue";
+import OTPAuth from "../views/OTPAuth.vue";
+import Match from "../views/Match.vue";
+import Chat from "../components/Chat.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +21,11 @@ const router = createRouter({
             path: "/register",
             name: "register",
             component: Register,
+        },
+        {
+            path: "/OTPAuth",
+            name: "OTPAuth",
+            component: OTPAuth,
         },
         {
             path: "/login",
@@ -38,6 +46,16 @@ const router = createRouter({
             path: "/detail/:id",
             name: "detail",
             component: Detail,
+        },
+        {
+            path: "/match",
+            name: "match",
+            component: Match,
+        },
+        {
+            path: "/chat/:id",
+            name: "chat",
+            component: Chat,
         },
     ],
 });

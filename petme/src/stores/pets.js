@@ -9,6 +9,7 @@ export const petStore = defineStore({
             breeds: [],
             pets: [],
             petDetail: {},
+            requestAdopts: [],
         };
     },
     getters: {},
@@ -21,6 +22,22 @@ export const petStore = defineStore({
                         url: `${this.baseURL}/pets`,
                     });
                     this.pets = response.data.pets;
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        },
+        addMatch(id) {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    let response = await axios({
+                        method: "post",
+                        url: `${this.baseURL}/match/${id}`,
+                        headers: {
+                            access_token: localStorage.getItem("access_token"),
+                        },
+                    });
                     resolve();
                 } catch (err) {
                     reject(err);
@@ -95,6 +112,23 @@ export const petStore = defineStore({
                         //headers
                     });
 
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        },
+        getMatch() {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    let response = await axios({
+                        method: "get",
+                        url: `${this.baseURL}/match`,
+                        headers: {
+                            access_token: localStorage.getItem("access_token"),
+                        },
+                    });
+                    this.requestAdopts = response.data.data;
                     resolve();
                 } catch (err) {
                     reject(err);

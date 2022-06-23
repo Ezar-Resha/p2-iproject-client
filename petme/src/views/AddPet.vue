@@ -31,6 +31,7 @@ export default {
         };
     },
     created() {
+        console.log(import.meta.env.VITE_storageBucket);
         this.getBreed().catch((err) => {
             console.log(err);
         });
@@ -42,6 +43,7 @@ export default {
                 this.mixedBreed = true;
                 this.unknownBreed = false;
             } else if (this.primaryBreed === "" && this.secondaryBreed === "") {
+                this.mixedBreed = false;
                 this.unknownBreed = true;
             }
 
@@ -168,7 +170,7 @@ export default {
     <div id="login" class="max-w-screen-2xl mx-auto pb-8">
         <div class="max-w-sm w-full lg:max-w-full lg:flex justify-center pl-12 pt-20 pr-12">
             <div class="bg-orange-400 shadow-lg w-max-6/12 border-black">
-                <p class="mt-4 ml-8"><router-link to="/"> &lt&lt Back </router-link></p>
+                <p class="mt-4 ml-8"><router-link to="/main"> &lt&lt Back </router-link></p>
                 <p class="text-center text-3xl uppercase font-bold">Add Pet Form</p>
                 <p class="ml-8">items in * are required</p>
                 <form>

@@ -3,11 +3,12 @@ import { mapActions, mapWritableState } from "pinia";
 import { onMounted } from "vue";
 import { loginRegister } from "./stores/LoginRegister";
 import { RouterLink, RouterView } from "vue-router";
-import NavBarVue from "./components/NavBar.vue";
+
 import Footer from "./components/Footer.vue";
+import Header from "./components/Header.vue";
 
 export default {
-    components: { NavBarVue, Footer },
+    components: { Footer, Header },
     created() {
         if (localStorage.getItem("access_token")) {
             this.isLoggedIn = true;
@@ -26,8 +27,8 @@ export default {
 <template>
     <div id="back" class="min-w-screen bg-gray-100">
         <div id="main" class="max-w-screen-2xl mx-auto min-h-screen bg-white outline-1">
-            <NavBarVue></NavBarVue>
-            <RouterView></RouterView>
+            <Header> </Header>
+            <RouterView> </RouterView>
         </div>
         <Footer></Footer>
     </div>
