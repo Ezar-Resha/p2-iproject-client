@@ -60,4 +60,19 @@ const router = createRouter({
     ],
 });
 
+router.beforeEach((to, from) => {
+    let authenticated = localStorage.getItem("access_token");
+    if (authenticated && to.name === "login") {
+        return { name: "main" };
+    } else if (authenticated && to.name === "register") {
+        return { name: "main" };
+    } else if (!authenticated && to.name === "addPet") {
+        return { name: "main" };
+    } else if (!authenticated && to.name === "match") {
+        return { name: "main" };
+    } else if (!authenticated && to.name === "chat") {
+        return { name: "main" };
+    }
+});
+
 export default router;

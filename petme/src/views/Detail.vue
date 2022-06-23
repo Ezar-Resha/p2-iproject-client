@@ -10,7 +10,12 @@ export default {
         this.getPetDetail(id)
             .then(() => {})
             .catch((err) => {
-                console.log(err);
+                Swal.fire({
+                    title: `Error ${err.response.data.statusCode}`,
+                    html: `${err.response.data.message}. `,
+                    icon: "error",
+                    confirmButtonText: "Return",
+                });
             });
     },
     methods: {
@@ -19,11 +24,15 @@ export default {
         methodMatch(id) {
             this.addMatch(id)
                 .then((res) => {
-                    console.log("done");
                     this.$router.push("/main");
                 })
                 .catch((err) => {
-                    console.log(err);
+                    Swal.fire({
+                        title: `Error ${err.response.data.statusCode}`,
+                        html: `${err.response.data.message}. `,
+                        icon: "error",
+                        confirmButtonText: "Return",
+                    });
                 });
         },
     },

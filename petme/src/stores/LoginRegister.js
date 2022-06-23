@@ -9,7 +9,7 @@ export const loginRegister = defineStore({
             username: "",
             email: "",
             password: "",
-            baseURL: "http://localhost:5555",
+            baseURL: "https://petdotme.herokuapp.com",
             isLoggedIn: false,
             loggedUser: "",
             loggedEmail: "",
@@ -63,7 +63,7 @@ export const loginRegister = defineStore({
                             otp: otp,
                         },
                     });
-                    console.log(response);
+
                     resolve();
                 } catch (err) {
                     reject(err);
@@ -81,7 +81,7 @@ export const loginRegister = defineStore({
                             access_token: localStorage.getItem("access_token"),
                         },
                     });
-                    console.log(response);
+
                     resolve();
                 } catch (err) {
                     reject(err);

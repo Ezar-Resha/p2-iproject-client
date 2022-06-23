@@ -31,9 +31,13 @@ export default {
         };
     },
     created() {
-        console.log(import.meta.env.VITE_storageBucket);
         this.getBreed().catch((err) => {
-            console.log(err);
+            Swal.fire({
+                title: `Error ${err.response.data.statusCode}`,
+                html: `${err.response.data.message}. `,
+                icon: "error",
+                confirmButtonText: "Return",
+            });
         });
     },
     methods: {
@@ -73,7 +77,12 @@ export default {
                     this.$router.push("/main");
                 })
                 .catch((err) => {
-                    console.log(err);
+                    Swal.fire({
+                        title: `Error ${err.response.data.statusCode}`,
+                        html: `${err.response.data.message}. `,
+                        icon: "error",
+                        confirmButtonText: "Return",
+                    });
                 })
                 .finally(() => {
                     this.name = "";

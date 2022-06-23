@@ -13,7 +13,12 @@ export default {
     },
     created() {
         this.getMatch().catch((err) => {
-            console.log(err);
+            Swal.fire({
+                title: `Error ${err.response.data.statusCode}`,
+                html: `${err.response.data.message}. `,
+                icon: "error",
+                confirmButtonText: "Return",
+            });
         });
     },
 

@@ -22,7 +22,12 @@ export default {
                     this.$router.push("/OTPAuth");
                 })
                 .catch((err) => {
-                    console.log(err);
+                    Swal.fire({
+                        title: `Error ${err.response.data.statusCode}`,
+                        html: `${err.response.data.message}. `,
+                        icon: "error",
+                        confirmButtonText: "Return",
+                    });
                 })
                 .finally(() => {
                     this.email = "";

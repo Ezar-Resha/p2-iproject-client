@@ -5,7 +5,7 @@ export const petStore = defineStore({
     id: "pet",
     state() {
         return {
-            baseURL: "http://localhost:5555",
+            baseURL: "https://petdotme.herokuapp.com",
             breeds: [],
             pets: [],
             petDetail: {},

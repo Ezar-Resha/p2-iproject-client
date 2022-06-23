@@ -12,7 +12,6 @@ export default {
     },
     mounted: function () {
         this.getPetDetail(this.$route.params.id).then((res) => {
-            console.log(this.petDetail);
             let user = {
                 name: localStorage.getItem("user"),
                 email: localStorage.getItem("email"),
